@@ -34,3 +34,6 @@ If you run into connection issues (cannot connect, timeout, etc):
 * Check you have only one client instance running (e.g. one Cursor window)
 * Check no other processes are using port localhost:3001.
 
+# Contact
+If you have ideas, suggestions, feedback, please reach me at linshu123@gmail.com
+
