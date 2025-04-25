@@ -28,6 +28,18 @@ Go to Cursor MCP config, which is a json file. Add the config for Volar with the
 }
 ```
 
+## MCP setup for Windsurf
+Go to Windsurf MCP config. Hit "View raw config". Add the config for Volar. If you have only one MCP server that is Volar, this is what the file should look like.
+```
+{
+  "mcpServers": {
+    "VolarTaskServer": {
+      "serverUrl": "http://localhost:3001/sse"
+    }
+  }
+}
+```
+
 ## MCP setup for  Cline
 Go to Cline MCP set up tab, use the following values:
 
