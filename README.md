@@ -13,8 +13,10 @@ https://youtu.be/mrdtMFBqyWM
 Download the latest extension package: https://github.com/linshu123/volar_docs/blob/main/volar-0.0.1.vsix
 
 # MCP Configs
-The server runs on http://localhost:3001/sse. You can use any client that supports MCP SSE with Volar. I have only tested with Cursor, and here's the config you can copy/paste into it.
-## Cursor
+The server runs on http://localhost:3001/sse. You can use any client that supports MCP SSE with Volar.
+
+## MCP set up for Cursor
+Go to Cursor MCP config, which is a json file. Add the config for Volar with the url. Here is what the entire file looks like if you have only Volar MCP server.
 ```
 {
   "mcpServers": {
@@ -25,6 +27,12 @@ The server runs on http://localhost:3001/sse. You can use any client that suppor
   }
 }
 ```
+
+## MCP set up for  Cline
+Go to Cline MCP set up tab, use the following values:
+
+* Server Name: `VolarTaskServer`
+* Server URL: `http://localhost:3001/sse`
 
 # Known Issues
 Only one AI client (a single Cursor/VS Code window) can be used at a time. If you have 2+ windows, the MCP connection fails in weird ways in all instances. 
