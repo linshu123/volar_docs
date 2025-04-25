@@ -51,12 +51,12 @@ Go to Cline MCP set up tab, use the following values:
 * Server URL: `http://localhost:3001/sse`
 
 # Known Issues
-Only one AI client (a single Cursor/VS Code window) can be used at a time. If you have 2+ windows, the MCP connection fails in weird ways in all instances. 
+Only one AI client (a single Cursor/VS Code window) can be used at a time. If you have 2+ windows, the MCP connection fails in weird ways for all processes that try to access Volar. 
 
 If you run into connection issues (cannot connect, timeout, etc):
 * Check your client (e.g. Cursor) MCP config
 * Check you have only one client instance running (e.g. one Cursor window)
-* Check no other processes are using the same port as (default is `localhost:3001`).
+* Check no other processes are using the same port (default is `localhost:3001`)
 
 # Contact
 If you have ideas, suggestions, feedback, please reach me at linshu123@gmail.com
