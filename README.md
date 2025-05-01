@@ -12,6 +12,27 @@ https://youtu.be/mrdtMFBqyWM
 # Download
 Download the latest extension package: https://github.com/linshu123/volar_docs/blob/main/volar-0.0.1.vsix
 
+# Usage
+### Task Management
+The creation and curation of tasks should be self-evident. You can of course also ask AI to make changes or organize tasks, such as "find all the tasks that are describing a bug and add [Bug] prefix to their title". 
+
+### How AI helps with Task Work
+There are 3 key features for asking AI to work on a task: "Flesh out", "Execute", and "Breakdown".
+
+**Flesh out:** With just a few words in the task title, you can use "Flesh out" to get AI to help you expand on that task. AI will help you investigate the codebase and add plans and implementation suggestions to the task. Then you can review that plan. If it all makes sense, you can use **Execute** to actually implement the task.
+
+**Execute:** This will ask AI to go straight into implementation mode. Ideally, there is already some plans and details in the task that you are confident about. AI will follow those plans and make the code changes.
+
+**Breakdown:** If you have a complex task that you feel AI won't be able to accomplish in one go, you can use this option to break down the task into multiple smaller tasks. You can recursively do this until you feel each task is small enough for AI to one-shot it.
+
+### Agent vs MCP
+To use AI to work on tasks, you have two ways: the built-in agent, or another agent client through MCP.
+
+**Built-in agent**: First you need to add the API keys for the model you want to use in the VS Code settings. Search for "Volar" in settings and you will see the places to add those API keys. Then, just toggle on "Agent" in the task view. Then click any of the "Flesh out"/"Execute"/"Breakdown" action and the agent will start working on it. If you can't see the chat window, try make the sidebar bigger, and check for the "chat" icon on the right side of the model name.
+
+**Through MCP**: You can use AI agent in Cursor, Windsurf, Cline, etc to perform "Flesh out"/"Execute"/"Breakdown" actions. First make sure the "Agent" toggle is off. Then use the dropdown menu on those actions to copy the prompt for those tasks, and paste it into the chat interface of Cursor/Windsurf/Cline to allow their agent interact with Volar through MCP. **You need to make sure there is only one Cursor/Windsurf/Cline window running for MCP to work successfully.** See section "Known Issues" for more details. Follow the steps below to set up MCP.
+
+
 # MCP Configs
 You can use any client that supports MCP Server-Sent Events (SSE) Transport.
 
