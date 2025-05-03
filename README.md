@@ -35,6 +35,7 @@ There are 3 key features for asking AI to work on a task: "Flesh out", "Execute"
 **Breakdown:** If you have a complex task that you feel AI won't be able to accomplish in one go, you can use this option to break down the task into multiple smaller tasks. You can recursively do this until you feel each task is small enough for AI to one-shot it.
 
 We also have a "commit" button. It's for quickly commit all changes with the task title as the message. (This may be too aggressive. We may remove it later.)
+
 ![Screenshot](https://github.com/linshu123/volar_docs/blob/main/resources/commit_button_zoomed_in.png)
 
 ## Agent Mode & Non-agent Mode (MCP)
