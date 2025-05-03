@@ -4,21 +4,27 @@ Volar is a task management tool for your programming needs. The idea is to provi
 * Human & AI alignment and collaboration
 * Enable an async workflow where humans don't need to wait on AI as much
 
-In the demo I will walk you through how to leverage Volar to go from: one-line idea -> detailed plan -> sub tasks (if needed) -> implementation by AI.
-
-![Screenshot](https://github.com/linshu123/volar_docs/blob/main/resources/screenshot_cursor.png)
-
 # Demo
+In the demo I will walk you through how to leverage Volar to go from: one-line idea -> detailed plan -> sub tasks (if needed) -> implementation by AI.
+(UI have changed a lot since the recording of the demo.)
 https://youtu.be/mrdtMFBqyWM
 
 # Download
-Download the latest extension package: https://github.com/linshu123/volar_docs/blob/main/volar-0.0.1.vsix
+Download the latest version from extension store: https://marketplace.visualstudio.com/items?itemName=VolarTools.volar-ai
 
 # Usage
-### Task Management
-The creation and curation of tasks should be self-evident. You can of course also ask AI to make changes or organize tasks, such as "find all the tasks that are describing a bug and add [Bug] prefix to their title". 
+## Task View & Task Management
+The creation and curation of tasks are straightforward.
+![Task View Screenshot](https://github.com/linshu123/volar_docs/blob/main/resources/task_view_usage.png)
 
-### How AI helps with Task Work
+Click on the "pencil" emoji to update an task. You can add simple context in task description to help AI work better. Both the floating "Done" button and the "Save" emoji will save the changes.
+![Task View Screenshot](https://github.com/linshu123/volar_docs/blob/main/resources/task_edit_usage.png)
+
+You can of course also ask AI to make changes or organize tasks, such as "find all the tasks that are describing a bug and add [Bug] prefix to their title". This will be explained below.
+
+## Take Actions on Task
+
+### What are task actions?
 There are 3 key features for asking AI to work on a task: "Flesh out", "Execute", and "Breakdown".
 
 **Flesh out:** With just a few words in the task title, you can use "Flesh out" to get AI to help you expand on that task. AI will help you investigate the codebase and add plans and implementation suggestions to the task. Then you can review that plan. If it all makes sense, you can use **Execute** to actually implement the task.
@@ -27,18 +33,37 @@ There are 3 key features for asking AI to work on a task: "Flesh out", "Execute"
 
 **Breakdown:** If you have a complex task that you feel AI won't be able to accomplish in one go, you can use this option to break down the task into multiple smaller tasks. You can recursively do this until you feel each task is small enough for AI to one-shot it.
 
-### Agent vs MCP
-To use AI to work on tasks, you have two ways: the built-in agent, or another agent client through MCP.
+We also have a "commit" button. It's for quickly commit all changes with the task title as the message. (This may be too aggressive. We may remove it later.)
 
-**Built-in agent**: First you need to add the API keys for the model you want to use in the VS Code settings. Search for "Volar" in settings and you will see the places to add those API keys. Then, just toggle on "Agent" in the task view. Then click any of the "Flesh out"/"Execute"/"Breakdown" action and the agent will start working on it. If you can't see the chat window, try make the sidebar bigger, and check for the "chat" icon on the right side of the model name.
+## Agent Mode & Non-agent Mode (MCP)
+To use AI to work on tasks, you have two ways: using the built-in agent, or using another agent through MCP.
 
-**Through MCP**: You can use AI agent in Cursor, Windsurf, Cline, etc to perform "Flesh out"/"Execute"/"Breakdown" actions. First make sure the "Agent" toggle is off. Then use the dropdown menu on those actions to copy the prompt for those tasks, and paste it into the chat interface of Cursor/Windsurf/Cline to allow their agent interact with Volar through MCP. **You need to make sure there is only one Cursor/Windsurf/Cline window running for MCP to work successfully.** See section "Known Issues" for more details. Follow the steps below to set up MCP.
+#### Agent Mode
+Agent mode requires bringing your own key for modle providers. We current support the top coding models from popular providers including OpenAI, Anthropic, Deepseek and OpenRouter. 
 
+First you need to add the API keys for the model you want to use in the VS Code settings. Search for "Volar" in settings and you will see the places to add those API keys. Then, turn on "Agent" mode in the task view. 
 
-# MCP Configs
-You can use any client that supports MCP Server-Sent Events (SSE) Transport.
+Turn on Agent toggle, cilck the "Play" emoji to see the dropdown menu. Click on any of those actions and a chat window will open up with the agent.
+![Screenshot](https://github.com/linshu123/volar_docs/blob/main/resources/task_action_usage_agent.png)
 
-The server runs on `http://localhost:3001/sse` by default. You can change that port number in your VS Code settings. Just remember to update the corresponding port number in your client MCP config. Also remember to refresh your VS Code window for the updated port number to take effect.
+After the agent has finished their work in the chat window, they will update the task content, like description or status. You can continue the conversation if you like.
+![Screenshot](https://github.com/linshu123/volar_docs/blob/main/resources/agent_usage.png)
+
+#### Non-agent Mode (MCP)
+If you already pay for services like Cursor or Windsurf, you can use those AI services to perform task actions. The idea of using MCP is to set up a connection (instructions below) so agents in other apps can access and update the tasks automatically. However, currently it is not possible to call those agents from outside. (MCP is a "one way" connection for the agent call outside, but not for the outside to call the agent.) So in order to get those agents to work on the tasks, we need to manually give them the instructions. The way we do this in Volar is to let you copy a prompt for the desired task action, and paste it into Cursor/Windsurf/etc chat for their agent to do the work. 
+
+Turn off Agent toggle, click the "Play" emoji to see the dropdown menu. Clicking on any action to copy the prompt. Paste it into Cursor/Windsurf/etc chat window.
+![Screenshot](https://github.com/linshu123/volar_docs/blob/main/resources/task_action_usage_non_agent.png)
+
+When that agent does their work, they can access and update tasks through MCP. Shown in the screenshot is a full execution plan worked out by Cursor agent.
+![Screenshot](https://github.com/linshu123/volar_docs/blob/main/resources/external_agent_usage.png)
+
+## How to set up MCP for non-agent mode
+You can use any client that supports MCP Server-Sent Events (SSE) Transport. 
+
+**IMPORTANT: You need to make sure there is only one Cursor/Windsurf/Cline window running for MCP to work successfully.** (See section "Known Issues" for more details.)
+
+The server runs on `http://localhost:3001/sse` by default. You can change that port number in your VS Code settings. Just remember to use the same port number in your client MCP config. (E.g. if you put port `4001` in Volar MCP config, make sure your Cursor/Windsurf/etc MCP config is also `4001`.) Refresh your VS Code window for the updated port number to take effect.
 
 The example configs below will use the default port `3001`.
 
