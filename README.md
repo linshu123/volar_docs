@@ -15,10 +15,10 @@ Download the latest version from extension store: https://marketplace.visualstud
 # Usage
 ## Task View & Task Management
 The creation and curation of tasks are straightforward.
-![Task View Screenshot](https://github.com/linshu123/volar_docs/blob/main/resources/task_view_usage.png)
+![Screenshot](https://github.com/linshu123/volar_docs/blob/main/resources/task_view_usage.png)
 
 Click on the "pencil" emoji to update an task. You can add simple context in task description to help AI work better. Both the floating "Done" button and the "Save" emoji will save the changes.
-![Task View Screenshot](https://github.com/linshu123/volar_docs/blob/main/resources/task_edit_usage.png)
+![Screenshot](https://github.com/linshu123/volar_docs/blob/main/resources/task_edit_usage.png)
 
 You can of course also ask AI to make changes or organize tasks, such as "find all the tasks that are describing a bug and add [Bug] prefix to their title". This will be explained below.
 
@@ -26,6 +26,7 @@ You can of course also ask AI to make changes or organize tasks, such as "find a
 
 ### What are task actions?
 There are 3 key features for asking AI to work on a task: "Flesh out", "Execute", and "Breakdown".
+![Screenshot](https://github.com/linshu123/volar_docs/blob/main/resources/task_action_buttons_zoomed_in.png)
 
 **Flesh out:** With just a few words in the task title, you can use "Flesh out" to get AI to help you expand on that task. AI will help you investigate the codebase and add plans and implementation suggestions to the task. Then you can review that plan. If it all makes sense, you can use **Execute** to actually implement the task.
 
@@ -34,6 +35,7 @@ There are 3 key features for asking AI to work on a task: "Flesh out", "Execute"
 **Breakdown:** If you have a complex task that you feel AI won't be able to accomplish in one go, you can use this option to break down the task into multiple smaller tasks. You can recursively do this until you feel each task is small enough for AI to one-shot it.
 
 We also have a "commit" button. It's for quickly commit all changes with the task title as the message. (This may be too aggressive. We may remove it later.)
+![Screenshot](https://github.com/linshu123/volar_docs/blob/main/resources/commit_button_zoomed_in.png)
 
 ## Agent Mode & Non-agent Mode (MCP)
 To use AI to work on tasks, you have two ways: using the built-in agent, or using another agent through MCP.
