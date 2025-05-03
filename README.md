@@ -6,6 +6,8 @@ Volar is a task management tool for your programming needs. The idea is to provi
 
 In the demo I will walk you through how to leverage Volar to go from: one-line idea -> detailed plan -> sub tasks (if needed) -> implementation by AI.
 
+![Screenshot](https://github.com/linshu123/volar_docs/blob/main/resources/screenshot_cursor.png)
+
 # Demo
 https://youtu.be/mrdtMFBqyWM
 
