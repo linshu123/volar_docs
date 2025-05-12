@@ -1,67 +1,59 @@
-# Volar - A New Task Tool
-Volar is a task management tool for your programming needs. The idea is to provide a flexible way for
-* Persisting & organizing context 
-* Human & AI alignment and collaboration
-* Enable an async workflow where humans don't need to wait on AI as much
+# Volar - Plan, Review & Build with AI
 
-# Demo
-In the demo I will walk you through how to leverage Volar to go from: one-line idea -> detailed plan -> sub tasks (if needed) -> implementation by AI.
-(UI have changed a lot since the recording of the demo.)
-https://youtu.be/mrdtMFBqyWM
+*Annoyed when AI starts touching unrelated code?*
 
-# Download
-Download the latest version from extension store: https://marketplace.visualstudio.com/items?itemName=VolarTools.volar-ai
+*Getting nervous when you ask AI to write something maybe a little too complicated?*
+
+*Waiting for AI to finish its code before you know if they understand your request or not?*
+
+*Pulling hair out when AI forgets your instructions?*
+
+*Not sure how much context to add in prompt?*
+
+---
+
+Introducing Volar - tool to collaborate with your AI coder. Get your AI to articulate your idea, break down complex requests, plan the implementation, and finally write your code!
+
+# Features
+
+* Plan from simple ideas: Write a single line on what you want. Let AI flesh out the specifics.
+* Break down big items: A feature is too complex? Or too ambiguous? Get AI to break it down into smaller pieces, add more details, and do it recusively until you are confident.
+* Execute plan: Execute code changes exactly according to the plan. Nothing less and nothing more.
+* Work with any MCP enabled AI agents: Supports Cursor, Windsurf, Claude Code, Cline, etc.
 
 # Usage
+
 ## Task View & Task Management
 The creation and curation of tasks are straightforward.
-![Screenshot](https://github.com/linshu123/volar_docs/blob/main/resources/task_view_usage.png)
+![Screenshot](https://raw.githubusercontent.com/linshu123/volar_docs/main/resources/Task%20List%20View.png)
 
-Click on the "pencil" emoji to update an task. You can add simple context in task description to help AI work better. Both the floating "Done" button and the "Save" emoji will save the changes.
-![Screenshot](https://github.com/linshu123/volar_docs/blob/main/resources/task_edit_usage.png)
+View details of a task. Click on the "pencil" emoji to edit the task. Normally the task description will be filled by AI, but you can add clues, context here. You can also make changes to plans written by AI.
+![Screenshot](https://raw.githubusercontent.com/linshu123/volar_docs/main/resources/Task%20Modal%20View.png)
 
-You can of course also ask AI to make changes or organize tasks, such as "find all the tasks that are describing a bug and add [Bug] prefix to their title". This will be explained below.
+Instead of manually editing tasks, you can also ask any AI agent to update tasks for you.
 
 ## Take Actions on Task
 
 ### What are task actions?
-There are 3 key features for asking AI to work on a task: "Flesh out", "Execute", and "Breakdown".
-![Screenshot](https://github.com/linshu123/volar_docs/blob/main/resources/task_action_buttons_zoomed_in.png)
+There are 3 key features for asking AI to work on a task: "Plan", "Execute", and "Breakdown".
+![Screenshot](https://raw.githubusercontent.com/linshu123/volar_docs/main/resources/Action%20Dropdown.png)
 
-**Flesh out:** With just a few words in the task title, you can use "Flesh out" to get AI to help you expand on that task. AI will help you investigate the codebase and add plans and implementation suggestions to the task. Then you can review that plan. If it all makes sense, you can use **Execute** to actually implement the task.
+**Plan:** With just a few words in the task title, you can use "Plan" to get AI to help you expand on it. AI will help you investigate the codebase and plan out the execution steps. If it all makes sense, use **Execute** to actually implement the task.
 
-**Execute:** This will ask AI to go straight into implementation mode. Ideally, there is already some plans and details in the task that you are confident about. AI will follow those plans and make the code changes.
+**Execute:** This tells AI to go make code changes. Ideally you would have reviewed the plans. For simple changes, executing directly may make sense too.
 
-**Breakdown:** If you have a complex task that you feel AI won't be able to accomplish in one go, you can use this option to break down the task into multiple smaller tasks. You can recursively do this until you feel each task is small enough for AI to one-shot it.
+**Breakdown:** For complex tasks, use this option to break them down into smaller pieces. Recursively do this until you feel confident for AI to one-shot the subtasks.
 
-We also have a "commit" button. It's for quickly commit all changes with the task title as the message. (This may be too aggressive. We may remove it later.)
+## Claude Code Mode
+Volar supports MCP with any AI agent, with instructions to configure down below. But for Claude Code, we supports a more seamless experience.
 
-![Screenshot](https://github.com/linshu123/volar_docs/blob/main/resources/commit_button_zoomed_in.png)
+When Claude Code mode is ON: For task actions, Volar will invoke Claude Code directly in a VS Code terminal, with the prompt already filled in.
+![Screenshot](https://raw.githubusercontent.com/linshu123/volar_docs/main/resources/Agent%20-%20Actions.png)
 
-## Agent Mode & Non-agent Mode (MCP)
-To use AI to work on tasks, you have two ways: using the built-in agent, or using another agent through MCP.
+When Claude Code mode is OFF: For task actions, Volar will copy the prompt for you to paste into any agent chat.
+![Screenshot](https://raw.githubusercontent.com/linshu123/volar_docs/main/resources/Non-agent%20-%20Actions.png)
 
-#### Agent Mode
-Agent mode requires bringing your own key for modle providers. We current support the top coding models from popular providers including OpenAI, Anthropic, Deepseek and OpenRouter. 
-
-First you need to add the API keys for the model you want to use in the VS Code settings. Search for "Volar" in settings and you will see the places to add those API keys. Then, turn on "Agent" mode in the task view. 
-
-Turn on Agent toggle, cilck the "Play" emoji to see the dropdown menu. Click on any of those actions and a chat window will open up with the agent.
-![Screenshot](https://github.com/linshu123/volar_docs/blob/main/resources/task_action_usage_agent.png)
-
-After the agent has finished their work in the chat window, they will update the task content, like description or status. You can continue the conversation if you like.
-![Screenshot](https://github.com/linshu123/volar_docs/blob/main/resources/agent_usage.png)
-
-#### Non-agent Mode (MCP)
-If you already pay for services like Cursor or Windsurf, you can use those AI services to perform task actions. The idea of using MCP is to set up a connection (instructions below) so agents in other apps can access and update the tasks automatically. However, currently it is not possible to call those agents from outside. (MCP is a "one way" connection for the agent call outside, but not for the outside to call the agent.) So in order to get those agents to work on the tasks, we need to manually give them the instructions. The way we do this in Volar is to let you copy a prompt for the desired task action, and paste it into Cursor/Windsurf/etc chat for their agent to do the work. 
-
-Turn off Agent toggle, click the "Play" emoji to see the dropdown menu. Clicking on any action to copy the prompt. Paste it into Cursor/Windsurf/etc chat window.
-![Screenshot](https://github.com/linshu123/volar_docs/blob/main/resources/task_action_usage_non_agent.png)
-
-When that agent does their work, they can access and update tasks through MCP. Shown in the screenshot is a full execution plan worked out by Cursor agent.
-![Screenshot](https://github.com/linshu123/volar_docs/blob/main/resources/external_agent_usage.png)
-
-## How to set up MCP for non-agent mode
+## How to set up MCP for Cursor/Windsurf/etc
 You can use any client that supports MCP Server-Sent Events (SSE) Transport. 
 
 **IMPORTANT: You need to make sure there is only one Cursor/Windsurf/Cline window running for MCP to work successfully.** (See section "Known Issues" for more details.)
